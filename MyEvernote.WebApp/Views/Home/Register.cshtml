@@ -1,0 +1,59 @@
+﻿
+@using MyEvernote.Entities.ValueObjects
+@model RegisterViewModel
+@{
+    Layout = "../Shared/_Layout2.cshtml";
+
+}
+<!DOCTYPE html>
+<style type="text/css">
+    .validaiton-summary-errors {
+      
+    }
+
+    .validation-summary-errors ul {
+        list-style-type: none;
+        padding: 5px;
+        color: #fff;
+    }
+
+    .validation-summary-errors ul li {
+        border: 2px solid;
+        background-color: crimson;
+       
+        padding: 5px;
+    }
+
+</style>
+
+
+
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+           
+          
+            <!-- Tabs Titles -->
+            <!-- Icon -->
+            <div class="fadeIn first">
+                <span class="fa fa-4x fa-user-plus p-2"></span>
+            </div>
+            @using (Html.BeginForm())
+            {
+                @Html.ValidationSummary(false)
+                <!-- Login Form -->
+                <form>
+                    @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", @placeholder = "Kullanıcı Adını Giriniz.", @name = "username" })
+                    @Html.TextBoxFor(model=>model.Email, new {@class = "form-control",@placeholder="E-mailinizi Giriniz."})
+                    @Html.TextBoxFor(model=>model.Password, new{@class= "form-control", @placeholder = "Şifrenizi Giriniz.", @type="password" } )
+                    @Html.TextBoxFor(model => model.RePassword, new { @class = "form-control form-text", @placeholder = "Şifrenizi Tekrar Giriniz", @type = "password" })
+                    <input type="submit" class="fadeIn fourth" value="Kayıt Ol">
+                </form>
+            }
+            <!-- Remind Passowrd -->
+            <div id="formFooter">
+                <a class="underlineHover" href="#">Forgot Password?</a>
+            </div>
+
+        </div>
+    </div>
+
