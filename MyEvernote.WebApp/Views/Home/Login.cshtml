@@ -14,6 +14,7 @@
             </div>
             @using (Html.BeginForm())
             {
+                @Html.ValidationSummary(false);
                 <!-- Login Form -->
                 <form>
                     @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", @placeholder = "Kullanıcı Adını Giriniz.", @name = "username" })

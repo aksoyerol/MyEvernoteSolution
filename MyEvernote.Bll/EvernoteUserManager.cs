@@ -13,21 +13,30 @@ namespace MyEvernote.Bll
     {
         private Repository<EvernoteUser> repo_user = new Repository<EvernoteUser>();
 
-        BusinessLayerResult<EvernoteUser> businessLayerResult = new BusinessLayerResult<EvernoteUser>();
+        
 
         public BusinessLayerResult<EvernoteUser> RegisterUser(RegisterViewModel model)
         {
             EvernoteUser user = repo_user.Find(x => x.UserName == model.UserName || x.Email == model.Email);
-            
+            BusinessLayerResult<EvernoteUser> businessLayerResult = new BusinessLayerResult<EvernoteUser>();
+
             if (user != null)
             {
                 if (user.UserName == model.UserName)
-                { businessLayerResult.Errors.Add("Kullanıcı adı kayıtlı !"); }
+                {
+                    businessLayerResult.Errors.Add("Kullanıcı adı kayıtlı !");
+                }
 
                 if (user.Email == model.Email)
                 {
                     businessLayerResult.Errors.Add("Bu mail adresi kayıtlı !");
                 }
+
+                if (model.Password != model.RePassword)
+                {
+                    businessLayerResult.Errors.Add("Parolalar eşleşmiyor !");
+                }
+
             }
             else
             {
@@ -36,11 +45,12 @@ namespace MyEvernote.Bll
                     UserName = model.UserName,
                     Email = model.Email,
                     Password = model.Password,
-                    CreatedOn = DateTime.Now,
                     IsActive = false,
                     IsAdmin = false,
+                    CreatedOn = DateTime.Now,
                     ModifiedOn = DateTime.Now,
                     ModifiedUserName = "system"
+
                 });
 
                 if (dbResult > 0)
@@ -53,6 +63,29 @@ namespace MyEvernote.Bll
 
 
             return businessLayerResult;
+
+        }
+
+        public BusinessLayerResult<EvernoteUser> LoginUser(LoginViewModel model)
+        {
+
+            BusinessLayerResult<EvernoteUser> layerResult = new BusinessLayerResult<EvernoteUser>();
+            layerResult.Result = repo_user.Find(x => x.UserName == model.UserName && x.Password == model.Password);
+
+            if (layerResult.Result != null)
+            {
+                if (!layerResult.Result.IsActive)
+                {
+                    layerResult.Errors.Add("Kullanıcı aktifleştirilmemiştir. Lütfen e-posta hesabınıza gelen bağlantıyı doğrulayınız.");
+                }
+            }
+            else
+            {
+                layerResult.Errors.Add("Kullanıcı adı veya şifre eşleşmiyor !");
+            }
+
+            return layerResult;
+
 
         }
     }

@@ -6,7 +6,6 @@ D:\Devops\MyEvernote\MyEvernoteSolution\MyEvernote.Entities\obj\Debug\MyEvernote
 D:\Devops\MyEvernote\MyEvernoteSolution\MyEvernote.Entities\obj\Debug\MyEvernote.Entities.pdb
 C:\Users\erola\source\repos\MyEvernoteSolution\MyEvernote.Entities\bin\Debug\MyEvernote.Entities.dll
 C:\Users\erola\source\repos\MyEvernoteSolution\MyEvernote.Entities\bin\Debug\MyEvernote.Entities.pdb
-C:\Users\erola\source\repos\MyEvernoteSolution\MyEvernote.Entities\obj\Debug\MyEvernote.Entities.csprojAssemblyReference.cache
 C:\Users\erola\source\repos\MyEvernoteSolution\MyEvernote.Entities\obj\Debug\MyEvernote.Entities.csproj.CoreCompileInputs.cache
 C:\Users\erola\source\repos\MyEvernoteSolution\MyEvernote.Entities\obj\Debug\MyEvernote.Entities.dll
 C:\Users\erola\source\repos\MyEvernoteSolution\MyEvernote.Entities\obj\Debug\MyEvernote.Entities.pdb

@@ -1,10 +1,10 @@
-﻿
-@using MyEvernote.Entities.ValueObjects
+﻿@using MyEvernote.Entities.ValueObjects
 @model RegisterViewModel
 @{
     Layout = "../Shared/_Layout2.cshtml";
 
 }
+
 <!DOCTYPE html>
 <style type="text/css">
     .validaiton-summary-errors {
@@ -41,13 +41,13 @@
             {
                 @Html.ValidationSummary(false)
                 <!-- Login Form -->
-                <form>
+                
                     @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", @placeholder = "Kullanıcı Adını Giriniz.", @name = "username" })
                     @Html.TextBoxFor(model=>model.Email, new {@class = "form-control",@placeholder="E-mailinizi Giriniz."})
                     @Html.TextBoxFor(model=>model.Password, new{@class= "form-control", @placeholder = "Şifrenizi Giriniz.", @type="password" } )
                     @Html.TextBoxFor(model => model.RePassword, new { @class = "form-control form-text", @placeholder = "Şifrenizi Tekrar Giriniz", @type = "password" })
                     <input type="submit" class="fadeIn fourth" value="Kayıt Ol">
-                </form>
+                
             }
             <!-- Remind Passowrd -->
             <div id="formFooter">

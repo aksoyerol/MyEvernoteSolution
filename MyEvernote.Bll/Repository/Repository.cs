@@ -6,6 +6,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using MyEvernote.Dal;
+using MyEvernote.Entities;
 
 namespace MyEvernote.Bll.Repository
 {
@@ -42,12 +43,16 @@ namespace MyEvernote.Bll.Repository
         public int Insert(T entity)
         {
             _context.Add(entity);
+
+
+
             return Save();
         }
 
 
         public int Update(T entity)
         {
+
             return Save();
         }
 

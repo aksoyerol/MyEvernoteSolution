@@ -54,7 +54,20 @@ namespace MyEvernote.WebApp.Controllers
         [HttpPost]
         public ActionResult Login(LoginViewModel model)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                EvernoteUserManager eum = new EvernoteUserManager();
+                BusinessLayerResult<EvernoteUser> res = eum.LoginUser(model);
+                if (res.Errors.Count > 0)
+                {
+                    res.Errors.ForEach(x => ModelState.AddModelError("", x));
+                    return View(model);
+                }
+
+                Session["login"] = res.Result;
+                return RedirectToAction("Index", "Home");
+            }
+            return View(model);
         }
 
         public ActionResult Register()
@@ -65,6 +78,7 @@ namespace MyEvernote.WebApp.Controllers
         [HttpPost]
         public ActionResult Register(RegisterViewModel model)
         {
+
             if (ModelState.IsValid)
             {
                 EvernoteUserManager eum = new EvernoteUserManager();
@@ -72,13 +86,14 @@ namespace MyEvernote.WebApp.Controllers
 
                 if (res.Errors.Count > 0)
                 {
-                    res.Errors.ForEach(x=> ModelState.AddModelError("",x));
-                    return View();
+                    res.Errors.ForEach(x => ModelState.AddModelError("", x));
+                    return View(model);
                 }
-
+                return RedirectToAction("RegisterOk");
             }
 
-            return RedirectToAction("RegisterOk");
+            return View(model);
+
 
         }
 
