@@ -66,13 +66,14 @@ namespace MyEvernote.Bll
                 {
 
                     //BusinessLayerResult<EvernoteUser> res = new BusinessLayerResult<EvernoteUser>();
-                    EvernoteUser res = repo_user.ListQueryable().FirstOrDefault(x=>x.UserName == model.UserName && x.Email == model.Email);
+                    BusinessLayerResult<EvernoteUser> res = new BusinessLayerResult<EvernoteUser>();
+                    res.Result = repo_user.ListQueryable().FirstOrDefault(x => x.UserName == model.UserName && x.Email == model.Email);
 
-                   // string siteUri = ConfigHelper.Get<string>("SiteRootUri");
-                    string activateUri = $"http://localhost:60660/Home/UserActivate/{res.ActivateGuid}/";
+                    // string siteUri = ConfigHelper.Get<string>("SiteRootUri");
+                    string activateUri = $"http://localhost:60660/Home/UserActivate/{res.Result.ActivateGuid}/";
                     string body =
                         $"Merhaba sitemize hoşgeldiniz. Linke tıklayarak üyeliğinizi aktifleştirebilirsiniz. <a class='btn btn-primary' target='_blank' href='{activateUri}'>Tıklayınız</a>";
-                    MailHelper.SendMail(body, res.Email, "MyEvernote Üyelik Aktifleştirme");
+                    MailHelper.SendMail(body, res.Result.Email, "MyEvernote Üyelik Aktifleştirme");
 
                     //aktivasyon maili kullanılacak
                     //businessLayerResult.Result.ActivateGuid
