@@ -51,6 +51,7 @@
     <Compile Include="Comment.cs" />
     <Compile Include="EvernoteUser.cs" />
     <Compile Include="Liked.cs" />
+    <Compile Include="Messages\ErrorMessageCode.cs" />
     <Compile Include="Note.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ValueObjects\LoginViewModel.cs" />

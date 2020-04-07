@@ -65,6 +65,10 @@
     <Compile Include="Repository\RepositoryBase.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MyEvernote.Common\MyEvernote.Common.csproj">
+      <Project>{fbe8bd38-b792-45d6-8d4c-c353ce443f41}</Project>
+      <Name>MyEvernote.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MyEvernote.Dal\MyEvernote.Dal.csproj">
       <Project>{5005b9b7-6ba4-4e2c-970f-5d408c14393a}</Project>
       <Name>MyEvernote.Dal</Name>

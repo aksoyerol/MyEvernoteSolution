@@ -13,13 +13,15 @@ namespace MyEvernote.WebApp.Controllers
 {
     public class HomeController : Controller
     {
+        public object errorMesages { get; private set; }
+
         // GET: Home
         public ActionResult Index()
         {
             NoteManager nm = new NoteManager();
             //Test test = new Test();
 
-            return View(nm.GetAllNotesQueryable().OrderByDescending(x => x.ModifiedOn).ToList());
+            return View(nm.GetAllNotesQueryable().OrderBy(x=>x.CreatedOn).ToList());
         }
 
         public ActionResult ByCategory(int? id)
@@ -54,13 +56,24 @@ namespace MyEvernote.WebApp.Controllers
         [HttpPost]
         public ActionResult Login(LoginViewModel model)
         {
+            ViewBag.HataGoster = 1;
             if (ModelState.IsValid)
             {
+                ViewBag.HataGoster = 0;
                 EvernoteUserManager eum = new EvernoteUserManager();
                 BusinessLayerResult<EvernoteUser> res = eum.LoginUser(model);
+
                 if (res.Errors.Count > 0)
                 {
+                    ViewBag.HataGoster = 1;
+
                     res.Errors.ForEach(x => ModelState.AddModelError("", x));
+
+                    if (res.Errors.Contains("Kullanıcı aktifleştirilmemiştir. Lütfen e-posta hesabınıza gelen bağlantıyı doğrulayınız."))
+                    {
+                        ViewBag.SetLink = "http://akjshdkasdasd.com";
+                    }
+
                     return View(model);
                 }
 
@@ -103,14 +116,45 @@ namespace MyEvernote.WebApp.Controllers
             return View();
         }
 
-        public ActionResult UserActivate(Guid activateId)
+        public ActionResult UserActivate(Guid id)
+        {
+            EvernoteUserManager eum = new EvernoteUserManager();
+            BusinessLayerResult<EvernoteUser> res = eum.ActivateUser(id);
+            if (res.Errors.Count > 0)
+            {
+                TempData["errors"] = res.Errors;
+                return RedirectToAction("UserActivateCancel", "Home");
+            }
+
+            return RedirectToAction("UserActivateOk", "Home");
+        }
+
+        public ActionResult UserActivateOk()
         {
             return View();
+
+        }
+
+        public ActionResult UserActivateCancel()
+        {
+
+            List<string> errorMessages = null;
+
+            if (TempData["errors"] != null)
+            {
+                errorMessages = (List<string>)TempData["erros"];
+
+
+            }
+
+            return View(errorMessages);
         }
 
         public ActionResult Logout()
         {
-            return View();
+            Session.Clear();
+
+            return RedirectToAction("Index", "Home");
         }
 
 

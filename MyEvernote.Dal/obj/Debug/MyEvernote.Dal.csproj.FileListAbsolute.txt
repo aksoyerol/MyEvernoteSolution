@@ -26,3 +26,5 @@ C:\Users\erola\source\repos\MyEvernoteSolution\MyEvernote.Dal\obj\Debug\MyEverno
 C:\Users\erola\source\repos\MyEvernoteSolution\MyEvernote.Dal\obj\Debug\MyEvernote.Dal.csproj.CopyComplete
 C:\Users\erola\source\repos\MyEvernoteSolution\MyEvernote.Dal\obj\Debug\MyEvernote.Dal.dll
 C:\Users\erola\source\repos\MyEvernoteSolution\MyEvernote.Dal\obj\Debug\MyEvernote.Dal.pdb
+C:\Users\erola\source\repos\MyEvernoteSolution\MyEvernote.Dal\bin\Debug\MyEvernote.Common.dll
+C:\Users\erola\source\repos\MyEvernoteSolution\MyEvernote.Dal\bin\Debug\MyEvernote.Common.pdb

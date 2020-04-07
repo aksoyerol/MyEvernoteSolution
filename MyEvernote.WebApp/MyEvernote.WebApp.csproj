@@ -325,7 +325,9 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
     <Content Include="Scripts\umd\popper.js.flow" />
@@ -360,6 +362,8 @@
     <Content Include="Views\Home\RegisterOk.cshtml" />
     <Content Include="Views\Home\UserActivate.cshtml" />
     <Content Include="Views\Shared\_Layout2.cshtml" />
+    <Content Include="Views\Home\UserActivateOk.cshtml" />
+    <Content Include="Views\Home\UserActivateCancel.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -381,6 +385,10 @@
     <ProjectReference Include="..\MyEvernote.Bll\MyEvernote.Bll.csproj">
       <Project>{dff6eb13-fdf3-4e13-b902-36f28d6e2dd3}</Project>
       <Name>MyEvernote.Bll</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MyEvernote.Common\MyEvernote.Common.csproj">
+      <Project>{fbe8bd38-b792-45d6-8d4c-c353ce443f41}</Project>
+      <Name>MyEvernote.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\MyEvernote.Entities\MyEvernote.Entities.csproj">
       <Project>{9b98f0f2-2505-47d1-a44e-ae68c1e11d40}</Project>

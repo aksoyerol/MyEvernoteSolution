@@ -16,18 +16,32 @@
          
              @using (Html.BeginForm()) {
 
-                    
+
+
                      <form class="">
                 <span class="login100-form-title p-b-20">
                     Welcome
                 </span>
-                <span class="login100-form-avatar">
-                    <img src="~/Content/LoginStyle/images/avatar-01.jpg" alt="AVATAR">
-                </span>
-                         <div class="alert alert-danger mt-3" role="alert">
-                             @Html.ValidationSummary(false)
-                         </div>
-                <div class="wrap-input100 validate-input m-t-5 m-b-20" data-validate="Enter username">
+                         <span class="login100-form-avatar">
+                             <img src="~/Content/LoginStyle/images/avatar-01.jpg" alt="AVATAR">
+                         </span>
+                         @if (ViewBag.HataGoster == 1)
+                         {
+                             <div class="alert alert-danger mt-3" role="alert">
+                                 @Html.ValidationSummary(false)
+                             </div>
+                         }
+                         
+                         
+                         @if (ViewBag.SetLink != null)
+                         {
+                         <a href="@ViewBag.SetLink">
+                             <div class="alert alert-info" role="alert">
+                                 Aktivasyon Yap
+                             </div>
+                         </a>
+                         }
+                         <div class="wrap-input100 validate-input m-t-5 m-b-20" data-validate="Enter username">
                     <span class="focus-input100" placeholder="Username"></span>
                     @Html.TextBoxFor(model => model.UserName, new { @class = "input100", type = "text", name = "username" })
                     @*<input class="input100" type="text" name="username">*@
