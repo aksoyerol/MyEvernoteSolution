@@ -7,7 +7,13 @@
 @model List<Note>
 
 
+<div class="col-lg-3">
+    @Html.Partial("_PartialCategory")
+</div>
+
+
 <div class="col-lg-9">
+
     <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
         <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -35,41 +41,45 @@
         </a>
     </div>
     <div class="row">
-      
-        @foreach(Note note in Model) { 
-        <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card h-100">
-                <a href="/Note/NoteEx/@note.Id"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                <div class="card-body">
-                    <h4 class="card-title">
-                        <a href="#">@note.Title</a>
-                    </h4>
 
-                    <p class="text-muted"><span class="fa fa-user">&nbsp;</span>@note.EvernoteUser.UserName &nbsp; &nbsp; <span class="fa fa-align-justify">&nbsp;</span><a href="/Home/ByCategory/@note.Category.Id">@note.Category.Title</a></p>
-                    <h6 class="text-muted"><span class="fa fa-calendar-plus-o">&nbsp;</span>@note.ModifiedOn.ToString("dd-MM-yy")&nbsp; <span class="fa fa-clock-o">&nbsp;</span>@note.ModifiedOn.ToString("HH:mm")</h6>
-                    <p class="card-text">
-                        @if (String.IsNullOrEmpty(note.Text)==false && note.Text.Length > 50)
-                        {
-                            @(note.Text.Substring(0,50) + "...");
-                        }
-                        else
-                        {
-                            @note.Text
-                        }
+        @foreach (Note note in Model)
+        {
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100">
+                    <a href="/Note/NoteEx/@note.Id"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <a href="#">@note.Title</a>
+                        </h4>
+
+                        <p class="text-muted"><span class="fa fa-user">&nbsp;</span>@note.EvernoteUser.UserName &nbsp; &nbsp; <span class="fa fa-align-justify">&nbsp;</span><a href="/Home/ByCategory/@note.Category.Id">@note.Category.Title</a></p>
+                        <h6 class="text-muted"><span class="fa fa-calendar-plus-o">&nbsp;</span>@note.ModifiedOn.ToString("dd-MM-yy")&nbsp; <span class="fa fa-clock-o">&nbsp;</span>@note.ModifiedOn.ToString("HH:mm")</h6>
+                        <p class="card-text">
+                            @if (String.IsNullOrEmpty(note.Text) == false && note.Text.Length > 50)
+                            {
+                                @(note.Text.Substring(0, 50) + "...");
+                            }
+                            else
+                            {
+                                @note.Text
+                            }
 
 
-                    </p>
-                </div>
-                <div class="card-footer small">
-                    <button class="btn btn-danger btn-sm btn-group-sm pull-left"><span class="fa fa-star-o">&nbsp;</span>@note.LikeCount</button>
-                    @*<small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>*@
+                        </p>
+                    </div>
+                    <div class="card-footer small">
+                        <button class="btn btn-danger btn-sm btn-group-sm pull-left"><span class="fa fa-star-o">&nbsp;</span>@note.LikeCount</button>
+                        @*<small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>*@
 
-                    <button class="btn btn-sm btn-info btn-group-sm pull-right"><span class="fa fa-comment">&nbsp;</span>Yorumlar</button>
+                        <button class="btn btn-sm btn-info btn-group-sm pull-right"><span class="fa fa-comment">&nbsp;</span>Yorumlar</button>
+                    </div>
                 </div>
             </div>
-        </div>
         }
+
+
 
     </div>
     <!-- /.row -->
+
 </div>

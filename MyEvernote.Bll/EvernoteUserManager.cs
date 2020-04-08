@@ -57,9 +57,6 @@ namespace MyEvernote.Bll
                     Name = "",
                     Surname = "",
                    
-
-                    
-
                 });
 
                 if (dbResult > 0)

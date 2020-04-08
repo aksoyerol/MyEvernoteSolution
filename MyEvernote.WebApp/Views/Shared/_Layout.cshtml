@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using MyEvernote.Entities
+<!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="utf-8">
@@ -7,83 +8,134 @@
     <meta name="author" content="">
     <title>Shop Homepage - Start Bootstrap Template</title>
     <!-- Bootstrap core CSS -->
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom styles for this template -->
-    <link href="~/Content/shop-homepage.css" rel="stylesheet">
-    <link href="~/Content/font-awesome.css" rel="stylesheet" />
-    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
-    <script src="~/Scripts/jquery-3.0.0.min.js"></script>
-    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="~/Content/LoginStyle/images/icons/favicon.ico" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Content/LoginStyle/vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Content/LoginStyle/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Content/LoginStyle/fonts/iconic/css/material-design-iconic-font.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Content/LoginStyle/vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Content/LoginStyle/vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Content/LoginStyle/vendor/animsition/css/animsition.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Content/LoginStyle/vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Content/LoginStyle/vendor/daterangepicker/daterangepicker.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Content/LoginStyle/css/util.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/LoginStyle/css/main.css">
+    <!--===============================================================================================-->
+    <script src="~/Scripts/jquery-3.0.0.slim.min.js"></script>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+    <script src="~/Content/LoginStyle/vendor/jquery/jquery-3.2.1.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/Content/LoginStyle/vendor/animsition/js/animsition.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/Content/LoginStyle/vendor/bootstrap/js/popper.js"></script>
+    <script src="~/Content/LoginStyle/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/Content/LoginStyle/vendor/select2/select2.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/Content/LoginStyle/vendor/daterangepicker/moment.min.js"></script>
+    <script src="~/Content/LoginStyle/vendor/daterangepicker/daterangepicker.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/Content/LoginStyle/vendor/countdowntime/countdowntime.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/Content/LoginStyle/js/main.js"></script>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
-        <div class="container">
-            <a class="navbar-brand" href="#"><span class="fa fa-calendar-plus-o"></span> My Evernote</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav navbar-expand-md">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">
-                            Home
-                            <span class="sr-only">(current)</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Home/MostLiked/">En Çok Beğenilenler</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Services</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
-                    </li>
-                </ul>
 
-                <ul class="navbar-nav ml-auto">
+@{
+    EvernoteUser user = null;
+
+    if (Session["login"] != null)
+    {
+        user = (EvernoteUser)Session["login"];
+    }
+}
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+    <div class="container">
+        <a href="/Home/Index/" class="navbar-brand" href="#"><span class="fa fa-calendar-plus-o"></span> My Evernote</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav navbar-expand-md">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">
+                        Home
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Home/MostLiked/">En Çok Beğenilenler</a>
+                </li>
+                @if (user != null) { 
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><span class="fa fa-user-secret">&nbsp;</span>Yönetim Paneli</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><span class="fa fa-phone">&nbsp;</span>Contact</a>
+                    </li>}
+            </ul>
+
+            <ul class="navbar-nav ml-auto">
+                @if (user == null)
+                {
                     <li class="nav-item">
                         <a class="nav-link" href="/Home/Login"><span class="fa fa-sign-in">&nbsp;</span>Giriş</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/Home/Register"><span class="fa fa-user-plus">&nbsp;</span>Üye Ol</a>
                     </li>
+                }
+                else { 
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><span class="fa fa-user">&nbsp;</span>Kullanıcı</a>
+                        <a class="nav-link" href="#"><span class="fa fa-user">&nbsp;</span>@user.UserName</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><span class="fa fa-sign-out">&nbsp;</span>Çıkış</a>
-                    </li>
-                </ul>
-              
+                        <a href="/Home/Logout/" class="nav-link" href="#"><span class="fa fa-sign-out">&nbsp;</span>Çıkış</a>
 
-            </div>
+                    </li>
+                }
+            </ul>
+
+
         </div>
-    </nav>
-    <!-- Page Content -->
+    </div>
+</nav>
+<br />
+<br />
+<!-- Page Content -->
+<div class="container">
+    <div class="row">
+        @*CategoryPartial*@
+        @*<div class="col-lg-3">
+                @Html.Partial("_PartialCategory");
+            </div>*@
+        <!-- /.col-lg-3 -->
+        <!-- /.col-lg-9 -->
+         @RenderBody()
+    </div>
+    <!-- /.row -->
+</div>
+<!-- /.container -->
+<!-- Footer -->
+<footer class="py-5 bg-dark">
     <div class="container">
-        <div class="row">
-            @*CategoryPartial*@
-            <div class="col-lg-3">
-              @Html.Partial("_PartialCategory");
-            </div>
-            <!-- /.col-lg-3 -->
-            <!-- /.col-lg-9 -->
-            
-            @RenderBody()
-        </div>
-        <!-- /.row -->
+        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
     </div>
     <!-- /.container -->
-    <!-- Footer -->
-    <footer class="py-5 bg-dark">
-        <div class="container">
-            <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
-        </div>
-        <!-- /.container -->
-    </footer>
-    <!-- Bootstrap core JavaScript -->
+</footer>
+<!-- Bootstrap core JavaScript -->
 
 </body>
 </html>
