@@ -20,8 +20,10 @@ C:\Users\erola\source\repos\MyEvernoteSolution\MyEvernote.Bll\bin\Debug\MyEverno
 C:\Users\erola\source\repos\MyEvernoteSolution\MyEvernote.Bll\bin\Debug\MyEvernote.Bll.pdb
 C:\Users\erola\source\repos\MyEvernoteSolution\MyEvernote.Bll\bin\Debug\EntityFramework.dll
 C:\Users\erola\source\repos\MyEvernoteSolution\MyEvernote.Bll\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\erola\source\repos\MyEvernoteSolution\MyEvernote.Bll\bin\Debug\MyEvernote.Common.dll
 C:\Users\erola\source\repos\MyEvernoteSolution\MyEvernote.Bll\bin\Debug\MyEvernote.Dal.dll
 C:\Users\erola\source\repos\MyEvernoteSolution\MyEvernote.Bll\bin\Debug\MyEvernote.Entities.dll
+C:\Users\erola\source\repos\MyEvernoteSolution\MyEvernote.Bll\bin\Debug\MyEvernote.Common.pdb
 C:\Users\erola\source\repos\MyEvernoteSolution\MyEvernote.Bll\bin\Debug\MyEvernote.Dal.pdb
 C:\Users\erola\source\repos\MyEvernoteSolution\MyEvernote.Bll\bin\Debug\MyEvernote.Dal.dll.config
 C:\Users\erola\source\repos\MyEvernoteSolution\MyEvernote.Bll\bin\Debug\MyEvernote.Entities.pdb
@@ -32,5 +34,3 @@ C:\Users\erola\source\repos\MyEvernoteSolution\MyEvernote.Bll\obj\Debug\MyEverno
 C:\Users\erola\source\repos\MyEvernoteSolution\MyEvernote.Bll\obj\Debug\MyEvernote.Bll.csproj.CopyComplete
 C:\Users\erola\source\repos\MyEvernoteSolution\MyEvernote.Bll\obj\Debug\MyEvernote.Bll.dll
 C:\Users\erola\source\repos\MyEvernoteSolution\MyEvernote.Bll\obj\Debug\MyEvernote.Bll.pdb
-C:\Users\erola\source\repos\MyEvernoteSolution\MyEvernote.Bll\bin\Debug\MyEvernote.Common.dll
-C:\Users\erola\source\repos\MyEvernoteSolution\MyEvernote.Bll\bin\Debug\MyEvernote.Common.pdb

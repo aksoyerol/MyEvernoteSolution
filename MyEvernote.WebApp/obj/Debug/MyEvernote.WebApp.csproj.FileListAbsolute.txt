@@ -87,6 +87,7 @@ C:\Users\erola\source\repos\MyEvernoteSolution\MyEvernote.WebApp\bin\EntityFrame
 C:\Users\erola\source\repos\MyEvernoteSolution\MyEvernote.WebApp\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 C:\Users\erola\source\repos\MyEvernoteSolution\MyEvernote.WebApp\bin\Microsoft.Web.Infrastructure.dll
 C:\Users\erola\source\repos\MyEvernoteSolution\MyEvernote.WebApp\bin\MyEvernote.Bll.dll
+C:\Users\erola\source\repos\MyEvernoteSolution\MyEvernote.WebApp\bin\MyEvernote.Common.dll
 C:\Users\erola\source\repos\MyEvernoteSolution\MyEvernote.WebApp\bin\MyEvernote.Entities.dll
 C:\Users\erola\source\repos\MyEvernoteSolution\MyEvernote.WebApp\bin\System.Web.Helpers.dll
 C:\Users\erola\source\repos\MyEvernoteSolution\MyEvernote.WebApp\bin\System.Web.Mvc.dll
@@ -97,6 +98,7 @@ C:\Users\erola\source\repos\MyEvernoteSolution\MyEvernote.WebApp\bin\System.Web.
 C:\Users\erola\source\repos\MyEvernoteSolution\MyEvernote.WebApp\bin\MyEvernote.Dal.dll
 C:\Users\erola\source\repos\MyEvernoteSolution\MyEvernote.WebApp\bin\MyEvernote.Bll.pdb
 C:\Users\erola\source\repos\MyEvernoteSolution\MyEvernote.WebApp\bin\MyEvernote.Bll.dll.config
+C:\Users\erola\source\repos\MyEvernoteSolution\MyEvernote.WebApp\bin\MyEvernote.Common.pdb
 C:\Users\erola\source\repos\MyEvernoteSolution\MyEvernote.WebApp\bin\MyEvernote.Entities.pdb
 C:\Users\erola\source\repos\MyEvernoteSolution\MyEvernote.WebApp\bin\EntityFramework.xml
 C:\Users\erola\source\repos\MyEvernoteSolution\MyEvernote.WebApp\bin\EntityFramework.SqlServer.xml
@@ -114,5 +116,3 @@ C:\Users\erola\source\repos\MyEvernoteSolution\MyEvernote.WebApp\obj\Debug\MyEve
 C:\Users\erola\source\repos\MyEvernoteSolution\MyEvernote.WebApp\obj\Debug\MyEvernote.WebApp.csproj.CopyComplete
 C:\Users\erola\source\repos\MyEvernoteSolution\MyEvernote.WebApp\obj\Debug\MyEvernote.WebApp.dll
 C:\Users\erola\source\repos\MyEvernoteSolution\MyEvernote.WebApp\obj\Debug\MyEvernote.WebApp.pdb
-C:\Users\erola\source\repos\MyEvernoteSolution\MyEvernote.WebApp\bin\MyEvernote.Common.dll
-C:\Users\erola\source\repos\MyEvernoteSolution\MyEvernote.WebApp\bin\MyEvernote.Common.pdb

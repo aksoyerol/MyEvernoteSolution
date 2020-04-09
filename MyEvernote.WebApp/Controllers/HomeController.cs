@@ -13,7 +13,7 @@ namespace MyEvernote.WebApp.Controllers
 {
     public class HomeController : Controller
     {
-        public object errorMesages { get; private set; }
+        
 
         // GET: Home
         public ActionResult Index()
@@ -159,7 +159,13 @@ namespace MyEvernote.WebApp.Controllers
 
         public ActionResult ShowProfile()
         {
-            EvernoteUser currentUser = (EvernoteUser)Session["login"];
+            if (Session["login"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            EvernoteUser currentUser = Session["login"] as EvernoteUser;
+
             EvernoteUserManager eum = new EvernoteUserManager();
             BusinessLayerResult<EvernoteUser> res = eum.GetUserById(currentUser.Id);
 
@@ -177,7 +183,7 @@ namespace MyEvernote.WebApp.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            EvernoteUser currentUser = (EvernoteUser)Session["login"];
+            EvernoteUser currentUser = Session["login"] as EvernoteUser;
             EvernoteUserManager eum = new EvernoteUserManager();
             BusinessLayerResult<EvernoteUser> res = eum.GetUserById(currentUser.Id);
 
@@ -186,6 +192,7 @@ namespace MyEvernote.WebApp.Controllers
                 //hata
             }
 
+           
             return View(res.Result);
         }
 
