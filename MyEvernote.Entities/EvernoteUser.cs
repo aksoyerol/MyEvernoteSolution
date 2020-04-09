@@ -26,6 +26,9 @@ namespace MyEvernote.Entities
         [Required, StringLength(30)]
         public string Password { get; set; }
 
+        [StringLength(100)]
+        public string ProfileImageFile { get; set; }
+
         [Required]
         public Guid ActivateGuid { get; set; }
 

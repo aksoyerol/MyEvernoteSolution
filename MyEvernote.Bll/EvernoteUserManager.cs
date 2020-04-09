@@ -50,6 +50,7 @@ namespace MyEvernote.Bll
                     Password = model.Password,
                     IsActive = false,
                     ActivateGuid = guid,
+                    ProfileImageFile = "/images/nullimage.jpg",
                     IsAdmin = false,
                     CreatedOn = DateTime.Now,
                     ModifiedOn = DateTime.Now,
@@ -119,6 +120,20 @@ namespace MyEvernote.Bll
             else
             {
                 res.Errors.Add("Bu kullanıcı zaten aktif edilmiş ! ");
+            }
+
+            return res;
+        }
+
+        public BusinessLayerResult<EvernoteUser> GetUserById(int id)
+        {
+            BusinessLayerResult<EvernoteUser> res = new BusinessLayerResult<EvernoteUser>();
+            res.Result = repo_user.Find(x => x.Id == id);
+
+            if (res.Result == null)
+            {
+                res.Errors.Add("Kullanıcı bulunamadı !");
+              
             }
 
             return res;

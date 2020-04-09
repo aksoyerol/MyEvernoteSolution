@@ -21,7 +21,7 @@ namespace MyEvernote.WebApp.Controllers
             NoteManager nm = new NoteManager();
             //Test test = new Test();
 
-            return View(nm.GetAllNotesQueryable().OrderBy(x=>x.CreatedOn).ToList());
+            return View(nm.GetAllNotesQueryable().OrderBy(x=>x.ModifiedOn).ToList());
         }
 
         public ActionResult ByCategory(int? id)
@@ -155,6 +155,40 @@ namespace MyEvernote.WebApp.Controllers
             Session.Clear();
 
             return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult ShowProfile()
+        {
+            EvernoteUser currentUser = (EvernoteUser)Session["login"];
+            EvernoteUserManager eum = new EvernoteUserManager();
+            BusinessLayerResult<EvernoteUser> res = eum.GetUserById(currentUser.Id);
+
+            if (res.Errors.Count > 0)
+            {
+                //hata
+            }
+
+            return View(res.Result);
+        }
+
+        public ActionResult EditProfile()
+        {
+            EvernoteUser currentUser = (EvernoteUser)Session["login"];
+            EvernoteUserManager eum = new EvernoteUserManager();
+            BusinessLayerResult<EvernoteUser> res = eum.GetUserById(currentUser.Id);
+
+            if (res.Errors.Count > 0)
+            {
+                //hata
+            }
+
+            return View(res.Result);
+        }
+
+        [HttpPost]
+        public ActionResult EditProfile(EvernoteUser user)
+        {
+            return View();
         }
 
 

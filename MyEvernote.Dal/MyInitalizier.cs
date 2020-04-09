@@ -16,12 +16,12 @@ namespace MyEvernote.Dal
             //{
             //    Name = "Erol",
             //    Surname = "Aksoy",
-            //    Email = "erolaksoy98@gmail.com",
-            //    ActivateGuid = new Guid(),
+            //    Email = "aa@aa.com",
+            //    ActivateGuid = Guid.NewGuid(),
             //    IsActive = true,
             //    IsAdmin = true,
-            //    UserName = "pcparticle",
-            //    Password = "123456",
+            //    UserName = "pcparticless",
+            //    Password = "123",
             //    CreatedOn = DateTime.Now,
             //    ModifiedOn = DateTime.Now.AddMinutes(5),
             //    ModifiedUserName = "pcparticle"
