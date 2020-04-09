@@ -21,7 +21,7 @@ namespace MyEvernote.WebApp.Controllers
             NoteManager nm = new NoteManager();
             //Test test = new Test();
 
-            return View(nm.GetAllNotesQueryable().OrderBy(x=>x.ModifiedOn).ToList());
+            return View(nm.GetAllNotesQueryable().OrderBy(x => x.ModifiedOn).ToList());
         }
 
         public ActionResult ByCategory(int? id)
@@ -173,6 +173,10 @@ namespace MyEvernote.WebApp.Controllers
 
         public ActionResult EditProfile()
         {
+            if (Session["login"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             EvernoteUser currentUser = (EvernoteUser)Session["login"];
             EvernoteUserManager eum = new EvernoteUserManager();
             BusinessLayerResult<EvernoteUser> res = eum.GetUserById(currentUser.Id);
@@ -186,9 +190,31 @@ namespace MyEvernote.WebApp.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditProfile(EvernoteUser user)
+        public ActionResult EditProfile(EvernoteUser user, HttpPostedFileBase profileImage)
         {
-            return View();
+       
+                if (profileImage != null && (profileImage.ContentType == "image/jpeg" ||
+                                             profileImage.ContentType == "image/jpg" ||
+                                             profileImage.ContentType == "image/png"))
+                {
+                    string fileName = $"user_{user.Id}_profileImage.{profileImage.ContentType.Split('/')[1]}";
+                    profileImage.SaveAs(Server.MapPath($"~/images/{fileName}"));
+                    user.ProfileImageFile = fileName;
+                }
+
+
+                EvernoteUserManager eum = new EvernoteUserManager();
+                BusinessLayerResult<EvernoteUser> res = eum.UpdateProfile(user);
+
+                if (res.Errors.Count > 0)
+                {
+                    res.Errors.ForEach(x => ModelState.AddModelError("", x));
+                    return View(res.Result);
+                }
+
+                Session["login"] = res.Result;
+           
+            return RedirectToAction("ShowProfile", "Home");
         }
 
 

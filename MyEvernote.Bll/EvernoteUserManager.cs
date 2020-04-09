@@ -57,7 +57,7 @@ namespace MyEvernote.Bll
                     ModifiedUserName = "system",
                     Name = "",
                     Surname = "",
-                   
+
                 });
 
                 if (dbResult > 0)
@@ -106,7 +106,7 @@ namespace MyEvernote.Bll
             BusinessLayerResult<EvernoteUser> res = new BusinessLayerResult<EvernoteUser>();
             res.Result = repo_user.Find(x => x.ActivateGuid == id);
 
-            if (res.Result!=null)
+            if (res.Result != null)
             {
                 if (res.Result.IsActive)
                 {
@@ -133,7 +133,51 @@ namespace MyEvernote.Bll
             if (res.Result == null)
             {
                 res.Errors.Add("Kullanıcı bulunamadı !");
-              
+
+            }
+
+            return res;
+        }
+
+        public BusinessLayerResult<EvernoteUser> UpdateProfile(EvernoteUser data)
+        {
+            EvernoteUser dbUser = repo_user.Find(x => x.UserName == data.UserName || x.Email == data.Email);
+            BusinessLayerResult<EvernoteUser> res = new BusinessLayerResult<EvernoteUser>();
+
+            if (dbUser != null && data.Id != dbUser.Id)
+            {
+                if (dbUser.UserName == data.UserName)
+                {
+                    res.Errors.Add("Bu kullanıcı adı kayıtlı !");
+                }
+
+                if (dbUser.Email == data.Email)
+                {
+                    res.Errors.Add("Bu mail adresi kayıtlı !");
+                }
+                return res;
+            }
+
+            res.Result = repo_user.Find(x => x.Id == data.Id);
+            if (res.Result != null)
+            {
+                res.Result.Email = data.Email;
+                res.Result.UserName = data.UserName;
+                res.Result.Name = data.Name;
+                //res.Result.Surname = data.Surname;
+                res.Result.Password = data.Password;
+                res.Result.ModifiedOn = DateTime.Now;
+                res.Result.ModifiedUserName = data.UserName;
+
+                if (String.IsNullOrEmpty(data.ProfileImageFile) == false)
+                {
+                    res.Result.ProfileImageFile = data.ProfileImageFile;
+                }
+
+                if (repo_user.Update(res.Result) == 0)
+                {
+                    res.Errors.Add("Profil güncellenemedi ! ");
+                }
             }
 
             return res;
