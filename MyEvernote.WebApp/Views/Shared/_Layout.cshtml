@@ -78,13 +78,30 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/Home/MostLiked/">En Çok Beğenilenler</a>
                 </li>
-                @if (user != null) { 
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"><span class="fa fa-user-secret">&nbsp;</span>Yönetim Paneli</a>
-                    </li>
+                @if (user != null) {
+
+                    <div class="dropdown">
+                        @*<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">*@
+                            <a type="button" class="nav-link "btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="fa fa-user-secret">&nbsp;</span>Yönetim Paneli</a>
+                        @*</button>*@
+                            <div class="dropdown-menu">
+                                <a href="/Note/AddNew" class="dropdown-item"><span class="text-muted fa fa-sticky-note">&nbsp;</span> Not Ekle</a>
+                                <a href="/Note/MyNotes" class="dropdown-item"><span class="text-muted fa fa-list">&nbsp;</span> Notlarım</a>
+                                <a href="/Note/MyLikedNotes" class="dropdown-item"><span class="text-muted fa fa-heart">&nbsp;</span> Beğendiklerim</a>
+                                @if (user.IsAdmin)
+                                {
+                                    
+                                    <div class="dropdown-divider" href="#"></div>
+                                    <a href="/Category/AddNew" class="dropdown-item"><span class="text-muted fa fa-subscript">&nbsp;</span> Kategori Ekle</a>
+                                    <a href="/Category/List" class="dropdown-item"><span class="text-muted fa fa-list">&nbsp;</span> Kategoriler</a>
+                                }
+                            </div>
+                    </div>
                     <li class="nav-item">
                         <a class="nav-link" href="#"><span class="fa fa-phone">&nbsp;</span>Contact</a>
-                    </li>}
+                    </li>
+
+                }
             </ul>
 
             <ul class="navbar-nav ml-auto">

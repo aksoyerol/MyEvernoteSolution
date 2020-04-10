@@ -13,7 +13,7 @@ namespace MyEvernote.WebApp.Controllers
 {
     public class HomeController : Controller
     {
-        
+
 
         // GET: Home
         public ActionResult Index()
@@ -192,14 +192,17 @@ namespace MyEvernote.WebApp.Controllers
                 //hata
             }
 
-           
+
             return View(res.Result);
         }
 
         [HttpPost]
         public ActionResult EditProfile(EvernoteUser user, HttpPostedFileBase profileImage)
         {
-       
+            ModelState.Remove("ModifiedUserName");
+
+            if (ModelState.IsValid)
+            {
                 if (profileImage != null && (profileImage.ContentType == "image/jpeg" ||
                                              profileImage.ContentType == "image/jpg" ||
                                              profileImage.ContentType == "image/png"))
@@ -220,8 +223,8 @@ namespace MyEvernote.WebApp.Controllers
                 }
 
                 Session["login"] = res.Result;
-           
-            return RedirectToAction("ShowProfile", "Home");
+            }
+            return View(user);
         }
 
 

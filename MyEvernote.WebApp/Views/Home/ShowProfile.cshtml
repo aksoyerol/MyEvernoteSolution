@@ -15,6 +15,10 @@
                         <img src="/images/nullimage.jpg" alt="@Model.UserName+'ProfileImage'" />
 
                     }
+                    else
+                    {
+                        <img src="@Model.ProfileImageFile" alt="@Model.UserName+'ProfileImage'" />
+                    }
 
                     <div class="file btn btn-lg btn-primary">
                         <a class="btn btn-info" href="/Home/Index/"> Change Photo</a>

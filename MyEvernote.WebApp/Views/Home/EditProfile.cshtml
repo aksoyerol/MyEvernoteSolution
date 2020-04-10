@@ -14,7 +14,8 @@
 
         @using (Html.BeginForm("EditProfile", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
-            @Html.HiddenFor(model=>model.Id)
+            @Html.HiddenFor(model => model.Id)
+
             @Html.ValidationSummary(false)
             <div class="col">
                 <div class="row">
@@ -27,6 +28,7 @@
                                             <div class="mx-auto" style="width: 140px;">
                                                 <div class="d-flex justify-content-center align-items-center rounded" style="height: 140px;">
                                                     <img class=" d-flex justify-content-center align-items-center rounded" src="/images/@Model.ProfileImageFile" width="140" height="140" />
+                                                    @Html.HiddenFor(model=>model.ProfileImageFile)
                                                 </div>
                                             </div>
                                         </div>
@@ -164,10 +166,10 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col d-flex justify-content-end">
-                                                        <input type="submit" class="btn btn-primary" value="Save Changes"/>
+                                                        <input type="submit" class="btn btn-primary" value="Save Changes" />
                                                         @*<button class="btn btn-primary" type="submit">Save Changes</button>*@
                                                     </div>
-                                                 
+
                                                 </div>
                                             </form>
 
