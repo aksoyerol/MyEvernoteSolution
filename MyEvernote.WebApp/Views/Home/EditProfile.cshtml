@@ -2,8 +2,10 @@
 @using MyEvernote.Entities
 @model EvernoteUser
 @{
-    ViewBag.Title = "EditProfile";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+                /**/
+
+                ViewBag.Title = "EditProfile";
+                Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
@@ -28,7 +30,10 @@
                                             <div class="mx-auto" style="width: 140px;">
                                                 <div class="d-flex justify-content-center align-items-center rounded" style="height: 140px;">
                                                     <img class=" d-flex justify-content-center align-items-center rounded" src="/images/@Model.ProfileImageFile" width="140" height="140" />
-                                                    @Html.HiddenFor(model=>model.ProfileImageFile)
+                                                    @if (Model.ProfileImageFile == null)
+                                                    {
+                                                        @Html.HiddenFor(model => model.ProfileImageFile)
+                                                    }
                                                 </div>
                                             </div>
                                         </div>
@@ -60,6 +65,8 @@
                                                     }
 
                                                     <div class="text-muted"><small>Joined @Model.CreatedOn</small></div>
+                                                    @Html.HiddenFor(model => model.CreatedOn)
+                                                    @Html.HiddenFor(model => model.ModifiedOn)
                                                     <div class="text-muted"><small>Updated @Model.ModifiedOn</small></div>
                                                 </div>
 
@@ -103,13 +110,13 @@
                                                             </div>
                                                         </div>
                                                         @*<div class="row">
-                                                            <div class="col mb-3">
-                                                                <div class="form-group">
-                                                                    <label>About</label>
-                                                                    <textarea class="form-control" rows="5" placeholder="My Bio"></textarea>
+                                                                <div class="col mb-3">
+                                                                    <div class="form-group">
+                                                                        <label>About</label>
+                                                                        <textarea class="form-control" rows="5" placeholder="My Bio"></textarea>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                        </div>*@
+                                                            </div>*@
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -125,44 +132,44 @@
                                                             </div>
                                                         </div>
                                                         @*<div class="row">
-                                                            <div class="col">
-                                                                <div class="form-group">
-                                                                    <label>New Password</label>
-                                                                    <input class="form-control" type="password" placeholder="••••••">
+                                                                <div class="col">
+                                                                    <div class="form-group">
+                                                                        <label>New Password</label>
+                                                                        <input class="form-control" type="password" placeholder="••••••">
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col">
-                                                                <div class="form-group">
-                                                                    <label>Confirm <span class="d-none d-xl-inline">Password</span></label>
-                                                                    <input class="form-control" type="password" placeholder="••••••">
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <div class="form-group">
+                                                                        <label>Confirm <span class="d-none d-xl-inline">Password</span></label>
+                                                                        <input class="form-control" type="password" placeholder="••••••">
+                                                                    </div>
+                                                                </div>
+                                                            </div>*@
+                                                    </div>
+                                                    @*<div class="col-12 col-sm-5 offset-sm-1 mb-3">
+                                                            <div class="mb-2"><b>Keeping in Touch</b></div>
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <label>Email Notifications</label>
+                                                                    <div class="custom-controls-stacked px-2">
+                                                                        <div class="custom-control custom-checkbox">
+                                                                            <input type="checkbox" class="custom-control-input" id="notifications-blog" checked="">
+                                                                            <label class="custom-control-label" for="notifications-blog">Blog posts</label>
+                                                                        </div>
+                                                                        <div class="custom-control custom-checkbox">
+                                                                            <input type="checkbox" class="custom-control-input" id="notifications-news" checked="">
+                                                                            <label class="custom-control-label" for="notifications-news">Newsletter</label>
+                                                                        </div>
+                                                                        <div class="custom-control custom-checkbox">
+                                                                            <input type="checkbox" class="custom-control-input" id="notifications-offers" checked="">
+                                                                            <label class="custom-control-label" for="notifications-offers">Personal Offers</label>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>*@
-                                                    </div>
-                                                    @*<div class="col-12 col-sm-5 offset-sm-1 mb-3">
-                                                        <div class="mb-2"><b>Keeping in Touch</b></div>
-                                                        <div class="row">
-                                                            <div class="col">
-                                                                <label>Email Notifications</label>
-                                                                <div class="custom-controls-stacked px-2">
-                                                                    <div class="custom-control custom-checkbox">
-                                                                        <input type="checkbox" class="custom-control-input" id="notifications-blog" checked="">
-                                                                        <label class="custom-control-label" for="notifications-blog">Blog posts</label>
-                                                                    </div>
-                                                                    <div class="custom-control custom-checkbox">
-                                                                        <input type="checkbox" class="custom-control-input" id="notifications-news" checked="">
-                                                                        <label class="custom-control-label" for="notifications-news">Newsletter</label>
-                                                                    </div>
-                                                                    <div class="custom-control custom-checkbox">
-                                                                        <input type="checkbox" class="custom-control-input" id="notifications-offers" checked="">
-                                                                        <label class="custom-control-label" for="notifications-offers">Personal Offers</label>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>*@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col d-flex justify-content-end">

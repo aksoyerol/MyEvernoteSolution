@@ -13,9 +13,7 @@ namespace MyEvernote.Bll
     public class EvernoteUserManager
     {
         private Repository<EvernoteUser> repo_user = new Repository<EvernoteUser>();
-
-
-
+        
         public BusinessLayerResult<EvernoteUser> RegisterUser(RegisterViewModel model)
         {
             EvernoteUser user = repo_user.Find(x => x.UserName == model.UserName || x.Email == model.Email);

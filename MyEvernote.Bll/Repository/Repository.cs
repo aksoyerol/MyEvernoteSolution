@@ -43,9 +43,7 @@ namespace MyEvernote.Bll.Repository
         public int Insert(T entity)
         {
             _context.Add(entity);
-
-
-
+            
             return Save();
         }
 
