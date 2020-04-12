@@ -13,7 +13,6 @@ namespace MyEvernote.Dal
 
         public DatabaseContext() : base("MyEvernoteDb")
         {
-                
         }
 
         public DbSet<EvernoteUser> EvernoteUser { get; set; }
@@ -22,6 +21,26 @@ namespace MyEvernote.Dal
         public DbSet<Liked> Liked { get; set; }
         public DbSet<Note> Note { get; set; }
 
-        
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            //FLUENT API
+
+            modelBuilder.Entity<Note>()
+                .HasMany(n => n.Comment)
+                .WithRequired(c => c.Note)
+                .WillCascadeOnDelete(true);
+
+            modelBuilder.Entity<Note>()
+                .HasMany(n=>n.Liked)
+                .WithRequired(c=>c.Note)
+                .WillCascadeOnDelete(true);
+
+            modelBuilder.Entity<Category>().HasMany(n=>n.Note).WithRequired(c=>c.Category)
+                .WillCascadeOnDelete(true);
+            
+        }
     }
+
+
 }
