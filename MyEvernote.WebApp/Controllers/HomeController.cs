@@ -19,7 +19,7 @@ namespace MyEvernote.WebApp.Controllers
             NoteManager nm = new NoteManager();
             //Test test = new Test();
 
-            return View(nm.GetAllNotesQueryable().OrderBy(x => x.ModifiedOn).ToList());
+            return View(nm.ListNote().OrderByDescending(x => x.ModifiedOn).ToList());
         }
 
         public ActionResult ByCategory(int? id)
@@ -198,6 +198,8 @@ namespace MyEvernote.WebApp.Controllers
         public ActionResult EditProfile(EvernoteUser user, HttpPostedFileBase profileImage)
         {
             ModelState.Remove("ModifiedUserName");
+            ModelState.Remove("CreatedOn");
+            ModelState.Remove("ModifiedOn");
 
             if (ModelState.IsValid)
             {
@@ -205,7 +207,15 @@ namespace MyEvernote.WebApp.Controllers
                                              profileImage.ContentType == "image/jpg" ||
                                              profileImage.ContentType == "image/png"))
                 {
+
+
                     string fileName = $"user_{user.Id}_profileImage.{profileImage.ContentType.Split('/')[1]}";
+                    //string dosyaYolu = Server.MapPath("~/images/");
+
+                    //if (dosyaYolu.Contains(fileName))
+                    //{
+
+                    //}
                     profileImage.SaveAs(Server.MapPath($"~/images/{fileName}"));
                     user.ProfileImageFile = fileName;
                 }

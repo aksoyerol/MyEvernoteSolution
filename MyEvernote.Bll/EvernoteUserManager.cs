@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using MyEvernote.Bll.Repository;
@@ -10,10 +11,10 @@ using MyEvernote.Entities.ValueObjects;
 
 namespace MyEvernote.Bll
 {
-    public class EvernoteUserManager
+    public class EvernoteUserManager : IRepository<EvernoteUser>
     {
         private Repository<EvernoteUser> repo_user = new Repository<EvernoteUser>();
-        
+
         public BusinessLayerResult<EvernoteUser> RegisterUser(RegisterViewModel model)
         {
             EvernoteUser user = repo_user.Find(x => x.UserName == model.UserName || x.Email == model.Email);
@@ -139,7 +140,7 @@ namespace MyEvernote.Bll
 
         public BusinessLayerResult<EvernoteUser> UpdateProfile(EvernoteUser data)
         {
-            EvernoteUser dbUser = repo_user.Find(x => x.UserName == data.UserName || x.Email == data.Email);
+            EvernoteUser dbUser = repo_user.Find(x =>(x.UserName == data.UserName || x.Email == data.Email));
             BusinessLayerResult<EvernoteUser> res = new BusinessLayerResult<EvernoteUser>();
 
             if (dbUser != null && data.Id != dbUser.Id)
@@ -162,7 +163,7 @@ namespace MyEvernote.Bll
                 res.Result.Email = data.Email;
                 res.Result.UserName = data.UserName;
                 res.Result.Name = data.Name;
-                //res.Result.Surname = data.Surname;
+                res.Result.Surname = data.Surname;
                 res.Result.Password = data.Password;
                 res.Result.ModifiedOn = DateTime.Now;
                 res.Result.ModifiedUserName = data.UserName;
@@ -179,6 +180,122 @@ namespace MyEvernote.Bll
             }
 
             return res;
+        }
+
+        public BusinessLayerResult<EvernoteUser> UserInsert(EvernoteUser data)
+        {
+            EvernoteUser user = repo_user.Find(x => x.UserName == data.UserName || x.Email == data.Email);
+            BusinessLayerResult<EvernoteUser> res = new BusinessLayerResult<EvernoteUser>();
+            res.Result = data;
+
+            if (user != null)
+            {
+                if (user.UserName == data.UserName)
+                {
+                    res.Errors.Add("Kullanıcı adı kayıtlı !");
+                }
+
+                if (user.Email == data.Email)
+                {
+                    res.Errors.Add("Bu email kayıtlı !");
+                }
+            }
+            else
+            {
+                res.Result.ActivateGuid = Guid.NewGuid();
+                res.Result.ProfileImageFile = "nullimage.jpg";
+                res.Result.ModifiedOn = DateTime.Now;
+                res.Result.CreatedOn = DateTime.Now;
+                res.Result.ModifiedUserName = "system";
+
+                int dbResult = repo_user.Insert(res.Result);
+
+                if (dbResult == 0)
+                {
+                    res.Errors.Add("Kullanıcı kayıt edilemedi !");
+                }
+            }
+
+            return res;
+        }
+
+        public BusinessLayerResult<EvernoteUser> UserUpdate(EvernoteUser data)
+        {
+            //EvernoteUser dbUser = repo_user.Find(x => x.UserName == data.UserName || x.Email == data.Email);
+            EvernoteUser dbUser = Find(x => x.Id != data.Id && (x.UserName == data.UserName || x.Email == data.Email));
+            BusinessLayerResult<EvernoteUser> res = new BusinessLayerResult<EvernoteUser>();
+            res.Result = dbUser;
+
+            if (dbUser != null && data.Id != dbUser.Id)
+            {
+                if (dbUser.UserName == data.UserName)
+                {
+                    res.Errors.Add("Bu kullanıcı adı kayıtlı !");
+                }
+
+                if (dbUser.Email == data.Email)
+                {
+                    res.Errors.Add("Bu mail adresi kayıtlı !");
+                }
+
+                return res;
+            }
+
+            res.Result = repo_user.Find(x => x.Id == data.Id);
+            if (res.Result != null)
+            {
+                res.Result.Email = data.Email;
+                res.Result.UserName = data.UserName;
+                res.Result.Name = data.Name;
+                res.Result.Surname = data.Surname;
+                res.Result.Password = data.Password;
+                res.Result.ModifiedOn = DateTime.Now;
+                res.Result.ModifiedUserName = data.UserName;
+                res.Result.IsAdmin = data.IsAdmin;
+                res.Result.IsActive = data.IsActive;
+
+                if (repo_user.Update(res.Result) == 0)
+                {
+                    res.Errors.Add("Profil güncellenemedi ! ");
+                }
+            }
+
+            return res;
+        }
+
+        public List<EvernoteUser> List()
+        {
+            return repo_user.List();
+        }
+
+        public IQueryable<EvernoteUser> List(Expression<Func<EvernoteUser, bool>> filter)
+        {
+            return repo_user.List(filter);
+        }
+
+        public EvernoteUser Find(Expression<Func<EvernoteUser, bool>> filter)
+        {
+            return repo_user.Find(filter);
+        }
+
+        public int Insert(EvernoteUser entity)
+        {
+            return repo_user.Insert(entity);
+        }
+
+        public int Update(EvernoteUser entity)
+        {
+            return repo_user.Update(entity);
+        }
+
+        public int Delete(EvernoteUser entity)
+        {
+            return repo_user.Delete(entity);
+        }
+
+        public int Save()
+        {
+            return repo_user.Save();
         }
     }
 }

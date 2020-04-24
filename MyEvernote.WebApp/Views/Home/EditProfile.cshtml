@@ -30,10 +30,10 @@
                                             <div class="mx-auto" style="width: 140px;">
                                                 <div class="d-flex justify-content-center align-items-center rounded" style="height: 140px;">
                                                     <img class=" d-flex justify-content-center align-items-center rounded" src="/images/@Model.ProfileImageFile" width="140" height="140" />
-                                                    @if (Model.ProfileImageFile == null)
-                                                    {
-                                                        @Html.HiddenFor(model => model.ProfileImageFile)
-                                                    }
+                                                   
+                                                    
+                                                       
+                                                    
                                                 </div>
                                             </div>
                                         </div>
@@ -55,7 +55,7 @@
 
                                                 </div>
                                                 <div class="text-center text-sm-right">
-                                                    @if (Model.IsAdmin == true)
+                                                    @if (Model.IsAdmin)
                                                     {
                                                         <span class="badge badge-secondary">administrator</span>
                                                     }
@@ -65,8 +65,8 @@
                                                     }
 
                                                     <div class="text-muted"><small>Joined @Model.CreatedOn</small></div>
-                                                    @Html.HiddenFor(model => model.CreatedOn)
-                                                    @Html.HiddenFor(model => model.ModifiedOn)
+                                                    @*@Html.HiddenFor(model => model.CreatedOn)
+                                                    @Html.HiddenFor(model => model.ModifiedOn)*@
                                                     <div class="text-muted"><small>Updated @Model.ModifiedOn</small></div>
                                                 </div>
 

@@ -48,111 +48,133 @@
     <script src="~/Content/LoginStyle/vendor/countdowntime/countdowntime.js"></script>
     <!--===============================================================================================-->
     <script src="~/Content/LoginStyle/js/main.js"></script>
+    
+    <link href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet"/>
+
+    <script src="~/Scripts/jquery.dataTables.min.js"></script>
 </head>
 <body>
 
-@{
-    EvernoteUser user = null;
+    @{
+        EvernoteUser user = null;
 
-    if (Session["login"] != null)
-    {
-        user = (EvernoteUser)Session["login"];
+        if (Session["login"] != null)
+        {
+            user = (EvernoteUser)Session["login"];
+        }
     }
-}
 
-<!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
-    <div class="container">
-        <a href="/Home/Index/" class="navbar-brand" href="#"><span class="fa fa-calendar-plus-o"></span> My Evernote</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav navbar-expand-md">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">
-                        Home
-                        <span class="sr-only">(current)</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/Home/MostLiked/">En Çok Beğenilenler</a>
-                </li>
-                @if (user != null) {
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+        <div class="container">
+            <a href="/Home/Index/" class="navbar-brand" href="#"><span class="fa fa-calendar-plus-o"></span> My Evernote</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav navbar-expand-md">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">
+                            Home
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Home/MostLiked/">En Çok Beğenilenler</a>
+                    </li>
+                    @if (user != null)
+                    {
 
-                    <div class="dropdown">
-                        @*<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">*@
-                            <a type="button" class="nav-link "btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="fa fa-user-secret">&nbsp;</span>Yönetim Paneli</a>
-                        @*</button>*@
+                        <div class="dropdown">
+                            @*<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">*@
+                            <a type="button" class="nav-link btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="fa fa-user-secret">&nbsp;</span>Yönetim Paneli</a>
+                            @*</button>*@
                             <div class="dropdown-menu">
                                 <a href="/Note/AddNew" class="dropdown-item"><span class="text-muted fa fa-sticky-note">&nbsp;</span> Not Ekle</a>
                                 <a href="/Note/MyNotes" class="dropdown-item"><span class="text-muted fa fa-list">&nbsp;</span> Notlarım</a>
                                 <a href="/Note/MyLikedNotes" class="dropdown-item"><span class="text-muted fa fa-heart">&nbsp;</span> Beğendiklerim</a>
                                 @if (user.IsAdmin)
                                 {
-                                    
+
                                     <div class="dropdown-divider" href="#"></div>
                                     <a href="/Category/AddNew" class="dropdown-item"><span class="text-muted fa fa-subscript">&nbsp;</span> Kategori Ekle</a>
                                     <a href="/Category/Index" class="dropdown-item"><span class="text-muted fa fa-list">&nbsp;</span> Kategoriler</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a href="/EvernoteUser/Create" class="dropdown-item"><span class="text-muted fa fa-user">&nbsp;</span> Kullanıcı Ekle</a>
+                                    <a href="/EvernoteUser/Index" class="dropdown-item"><span class="text-muted fa fa-list">&nbsp;</span> Kullanıcılar</a>
+
                                 }
                             </div>
-                    </div>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"><span class="fa fa-phone">&nbsp;</span>Contact</a>
-                    </li>
+                        </div>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><span class="fa fa-phone">&nbsp;</span>Contact</a>
+                        </li>
 
-                }
-            </ul>
+                    }
+                </ul>
 
-            <ul class="navbar-nav ml-auto">
-                @if (user == null)
-                {
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Home/Login"><span class="fa fa-sign-in">&nbsp;</span>Giriş</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Home/Register"><span class="fa fa-user-plus">&nbsp;</span>Üye Ol</a>
-                    </li>
-                }
-                else { 
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Home/ShowProfile/"><span class="fa fa-user">&nbsp;</span>@user.UserName</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/Home/Logout/" class="nav-link" href="#"><span class="fa fa-sign-out">&nbsp;</span>Çıkış</a>
+                <ul class="navbar-nav ml-auto">
+                    @if (user == null)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Home/Login"><span class="fa fa-sign-in">&nbsp;</span>Giriş</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Home/Register"><span class="fa fa-user-plus">&nbsp;</span>Üye Ol</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Home/ShowProfile/"><span class="fa fa-user">&nbsp;</span>@user.UserName</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/Home/Logout/" class="nav-link" href="#"><span class="fa fa-sign-out">&nbsp;</span>Çıkış</a>
 
-                    </li>
-                }
-            </ul>
+                        </li>
+                    }
+                </ul>
 
 
+            </div>
         </div>
-    </div>
-</nav>
-<br />
-<br />
-<!-- Page Content -->
-<div class="container">
-    @**@<div class="row">
+    </nav>
+    <br />
+    <br />
+    <!-- Page Content -->
+    <div class="container">
+
         @*CategoryPartial*@
         @*<div class="col-lg-3">
                 @Html.Partial("_PartialCategory");
             </div>*@
         <!-- /.col-lg-3 -->
         <!-- /.col-lg-9 -->
-         @RenderBody()
-    </div>
-    <!-- /.row -->
-</div>
-<!-- /.container -->
-<!-- Footer -->
-<footer class="py-5 bg-dark">
-    <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
+        @RenderBody()
+
+        <!-- /.row -->
     </div>
     <!-- /.container -->
-</footer>
-<!-- Bootstrap core JavaScript -->
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+        <div class="container">
+            <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
+        </div>
+        <!-- /.container -->
+    </footer>
+    <!-- Bootstrap core JavaScript -->
 
+    <script>
+        $(document).ready(function () {
+            $('#deneme').DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Turkish.json"
+                }
+            });
+        });
+    </script>
+
+    
+ 
 </body>
 </html>

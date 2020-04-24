@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -11,28 +12,31 @@ namespace MyEvernote.Entities
     [Table("EvernoteUser")]
     public class EvernoteUser : BaseEntity 
     {
-        [StringLength(30)]
+        [DisplayName("İsim"),StringLength(30)]
         public string Name { get; set; }
 
-        [StringLength(30)]
+        [DisplayName("Soyisim"), StringLength(30)]
         public string Surname { get; set; }
 
-        [Required, StringLength(30)]
+        [DisplayName("Kullanıcı Adı"), Required, StringLength(30)]
         public string UserName { get; set; }
 
-        [Required, StringLength(30)]
+        [DisplayName("E-Mail"), Required, StringLength(30)]
         public string Email { get; set; }
 
-        [Required, StringLength(30)]
+        [DisplayName("Şifre"), Required, StringLength(30)]
         public string Password { get; set; }
 
-        [StringLength(100)]
+        [StringLength(100),ScaffoldColumn(false)]
         public string ProfileImageFile { get; set; }
 
-        [Required]
+        [Required,ScaffoldColumn(false)]
         public Guid ActivateGuid { get; set; }
 
+        [DisplayName("Aktif?")]
         public bool IsActive { get; set; }
+
+        [DisplayName("Admin?")]
         public bool IsAdmin { get; set; }
 
         public virtual List<Note> Note { get; set; }
